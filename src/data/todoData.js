@@ -21,16 +21,4 @@ function getItems()
     });
 } 
 
-function addNewItem(name, description, id, order)
-{
-    return new Promise((resolve, reject) => {
-        axios.post('http://melatupa.azurewebsites.net/regionLevels', {
-            name,
-            description,
-            id,
-            order
-        }).then(result => { resolve(); }).catch(error => { console.log(error); reject(); });
-    })
-}
-
 export default { getItems };

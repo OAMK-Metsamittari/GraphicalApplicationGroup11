@@ -4,12 +4,7 @@ const ReactHighcharts = require('react-highcharts');
 class Graphs extends Component {
     render () {
 
-        /*
-        {
-            name: 'IE',
-            y: 56.33
-        }
-        */
+        //Here we get the data for the tables, charts, whatever.
         let processedTodoTypes = [];
         this.props.items.forEach(element => {
             let todoIndex = processedTodoTypes.findIndex(todoType => todoType.name === element.type);
@@ -32,7 +27,7 @@ class Graphs extends Component {
             },
         
             title: {
-                text: 'Highcharts Polar Chart'
+                text: 'Pohjois-Pohjanmaa 2026 (- 2030)'
             },
         
             pane: {
@@ -69,18 +64,10 @@ class Graphs extends Component {
             series: [{
                 type: 'column',
                 name: 'Column',
-                data: [8, 7, 6, 5, 4, 3, 2, 1],
-                pointPlacement: 'between'
-            }, {
-                type: 'line',
-                name: 'Line',
-                data: [1, 2, 3, 4, 5, 6, 7, 8]
-            }, {
-                type: 'area',
-                name: 'Area',
-                data: [1, 8, 2, 7, 3, 6, 4, 5]
+                data: [8, 7, 6, 5, 4, 3, 2, 1] //data: processedTodoTypes
             }]
         };
+
         return (
             <div>
                 <ReactHighcharts config = {config}></ReactHighcharts>
