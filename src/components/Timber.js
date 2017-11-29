@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-class componentName extends Component {
+class Timber extends Component {
     render () {
         return (
             <div className="row">
@@ -17,4 +17,4 @@ class componentName extends Component {
     }
 }
 
-export default componentName
+export default Timber

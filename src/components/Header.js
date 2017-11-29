@@ -6,15 +6,14 @@ class Region extends Component {
             <div className="App">
                 <div className="col-md-12">
                 <div className="navbar navbar-custom header">
-                    <div className="container-fluid"><b>Metsämittari</b>
+                    <h1 className="container-fluid"><b>Metsämittari</b></h1>
                         <div className="header">
                             
                             
                         </div>                        
                     </div>
                 </div>        
-              </div>
-            </div>
+              </div>           
         )
     }
 }

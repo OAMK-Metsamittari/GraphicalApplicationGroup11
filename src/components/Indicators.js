@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-class componentName extends Component {
+class Indicators extends Component {
     render () {
         return (
             <div className="row">
@@ -12,4 +12,4 @@ class componentName extends Component {
     }
 }
 
-export default componentName
+export default Indicators
