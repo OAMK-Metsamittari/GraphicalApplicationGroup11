@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-class Regionlevel extends Component {s    
+class Region extends Component {
     render () {
-       
         return (
-            <div className="row">
-                <div className="col-md-12 textfont"><b>Aluetasot</b>
+            <div class="row">
+                <div class="col-md-12 textfont"><b>Alue</b>
                     <div class="dropdown">
                     <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Dropdown Example
                     <span class="caret"></span></button>
@@ -17,9 +16,9 @@ class Regionlevel extends Component {s
                     </ul>
                   </div>
                 </div>
-            </div>     
-        )      
-    }    
+            </div>
+        )
+    }
 }
 
-export default Regionlevel
+export default Region

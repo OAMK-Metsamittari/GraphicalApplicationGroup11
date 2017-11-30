@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 
-class Coal extends Component {
+class Carbon extends Component {
     render () {
         return (
             <div className="row">
                 <div className="col-md-12">
-                     <div className="coal"><b>Hiili</b>
-                        <ul className="coalUi">
+                     <div className="carbon"><b>Hiili</b>
+                        <ul className="carbonText">
                             <li>Hiilen määrä</li>                            
                         </ul>
                      </div>
@@ -16,4 +16,4 @@ class Coal extends Component {
     }
 }
 
-export default Coal
+export default Carbon
