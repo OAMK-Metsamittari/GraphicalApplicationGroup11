@@ -7,18 +7,22 @@ function getItems()
 
         axios.get("http://melatupa.azurewebsites.net/regionLevels")
         .then(results => {
-            console.log(results);
+            console.log("todoData results:" + results);
+            
             const items = results.data.map(element => {  
-                element.dueDate = moment(element.dueDate);
-                return element;
+                element.order = moment(element.order);
+                console.log("order: " + element.order);
+                return element.id;
             });
+            
             resolve(items);
+            console.log("items: " + items);
         })
         .catch(error => {
             console.log(error);
             reject();
         })
     });
-} 
+}
 
 export default { getItems };
