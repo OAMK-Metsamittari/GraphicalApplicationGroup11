@@ -28,10 +28,8 @@ class App extends Component {
   }
 
   chartBtn(){
-    // täällä vie uusi graph arvo Graphs.js ja päivitä view
     console.log("wooo");
-    //Graphs graph={this.state.graph = 3};
-    this.setState({ graph: 1}); //ei toimi
+    this.setState({ graph: 1}); //ei toimi, pitää enää saada täällä vaihdettua graph arvo, niin ja päivittää render
     console.log("graph: " + this.state.graph);
   }
 
