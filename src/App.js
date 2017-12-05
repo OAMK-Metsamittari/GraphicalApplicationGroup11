@@ -87,22 +87,16 @@ class App extends Component {
       </div>
       <div className="col-md-3 well well-sm indicator">
         <div className="col-md-12"> 
-          <Indicators />
-          <Timber />
+        <Indicators />
+        <Timber />
+        <Products />
+        <Diversity />
+        <Carbon />
+        <Other />
         </div>
       </div>       
+    </div>               
     </div>
-        <div className="col-md-3 well well-sm indicator">
-          <div className="col-md-12"> 
-            <Indicators />
-            <Timber />
-            <Products />
-            <Diversity />
-            <Carbon />
-            <Other />
-              </div>
-            </div>       
-          </div>
     );
   }
 }
