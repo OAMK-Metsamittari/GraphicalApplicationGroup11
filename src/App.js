@@ -81,9 +81,9 @@ class App extends Component {
       </div>       
       <div className="col-md-6">
         <Graphs items={ this.state.items } graph={ this.state.graph }/>
-        <button className="btn btn-success" onClick={ this.chartBtn }>Chart</button>
-        <button className="btn btn-success" onClick={ this.columnBtn }>Column</button>
-        <button className="btn btn-success" onClick={ this.tableBtn }>Table</button>
+        <button className="col-md-offset-4 btn btn-default" onClick={ this.chartBtn }>Pyöreä pylväskaavio</button>
+        <button className="btn btn-default" onClick={ this.columnBtn }>Pylväskaavio</button>
+        <button className="btn btn-default" onClick={ this.tableBtn }>Taulukko</button>
       </div>
       <div className="col-md-3 well well-sm indicator">
         <div className="col-md-12"> 

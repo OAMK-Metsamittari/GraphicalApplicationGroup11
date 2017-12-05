@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 const ReactHighcharts = require('react-highcharts');
+const HighchartsMore = require('highcharts-more')(ReactHighcharts.Highcharts);
 
 class Graphs extends Component {
 
