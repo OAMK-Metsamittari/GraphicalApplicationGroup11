@@ -18,6 +18,10 @@ class App extends Component {
       items: [],
       graph: 1
     };
+
+    this.chartBtn = this.chartBtn.bind(this);
+    this.columnBtn = this.columnBtn.bind(this);
+    this.tableBtn = this.tableBtn.bind(this);
   }
 
   componentDidMount() {
@@ -29,12 +33,21 @@ class App extends Component {
 
   chartBtn(){
     console.log("wooo");
-    this.setState({ graph: 1}); //ei toimi, pitää enää saada täällä vaihdettua graph arvo, niin ja päivittää render
+    this.setState({ graph: 1});
     console.log("graph: " + this.state.graph);
   }
 
-  columnBtn(){}
-  tableBtn(){}
+  columnBtn(){
+    console.log("wooo");
+    this.setState({ graph: 2});
+    console.log("graph: " + this.state.graph);
+  }
+
+  tableBtn(){
+    console.log("wooo");
+    this.setState({ graph: 3});
+    console.log("graph: " + this.state.graph);
+  }
 
   //renderissä haetaan graph arvo App.js ja viedään se Graphs.js, nappien onClickissä voi vaihtaa sitä graph arvoa ja päivittää App.js render()
 
