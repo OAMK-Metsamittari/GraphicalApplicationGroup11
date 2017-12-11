@@ -3,20 +3,24 @@ import moment from 'moment';
 
 function getItems()
 {
-    return new Promise((resolve, reject) => {
+    /*
+    if(lang === true){
+        headers =  { headers: {
+            'Accept-Language': 'fi' }
+            }  
+    }else {
+        headers =  { headers: {
+            'Accept-Language': 'en' }
+            }
+    }
+    */
 
-        axios.get("http://melatupa.azurewebsites.net/regionLevels")
+    return new Promise((resolve , reject) => {
+        axios.get("http://melatupa.azurewebsites.net/regionLevels" , headers)
         .then(results => {
-            console.log("todoData results:" + results);
-            
-            const items = results.data.map(element => {  
-                element.order = moment(element.order);
-                console.log("order: " + element.order);
-                return element.id;
-            });
-            
+            console.log("results: " + results)
+            const items = results.data;
             resolve(items);
-            console.log("items: " + items);
         })
         .catch(error => {
             console.log(error);
