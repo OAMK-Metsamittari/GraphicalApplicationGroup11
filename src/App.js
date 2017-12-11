@@ -34,9 +34,9 @@ class App extends Component {
   }
 
   componentDidMount() {
-    itemData.getItems().then(result => {
+    itemData.getRegionLevels().then(result => {
       this.setState({ items: result});
-      console.log("result: " + result);
+      console.log("getRegionLevels result: " + result);
     });
   }
 
