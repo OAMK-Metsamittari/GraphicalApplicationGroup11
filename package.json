@@ -5,11 +5,7 @@
   "dependencies": {
     "axios": "^0.17.1",
     "bootstrap": "^3.3.7",
-<<<<<<< HEAD
     "highcharts-more": "^0.1.2",
-=======
-    "moment": "^2.19.3",
->>>>>>> a97bfdbd63a76ec59cfcb45e6ccb90bda11f4ba7
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
     "react-highcharts": "^15.0.0",

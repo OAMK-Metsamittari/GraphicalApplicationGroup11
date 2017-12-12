@@ -7,15 +7,14 @@ class Regionlevel extends Component {s
         return (
             <div className="row">
                 <div className="col-md-12 textfont"><b>Aluetasot</b>
-                    <div class="dropdown">
-                    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Dropdown Example
-                    <span class="caret"></span></button>
-                    <ul class="dropdown-menu">
-                      <li><a href="#">HTML</a></li>
-                      <li><a href="#">CSS</a></li>
-                      <li><a href="#">JavaScript</a></li>
-                    </ul>
-                  </div>
+                <div>
+                    <select>
+                    <option value="test1">test</option>
+                    <option value="test2">123</option>
+                    <option value="test3">456</option>
+                    <option value="test4">789</option>
+                </select>
+                </div>
                 </div>
             </div>     
         )      
