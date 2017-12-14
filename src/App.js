@@ -24,20 +24,37 @@ class App extends Component {
     super(props);
 
     this.state = {
-      items: [],
+      lang: true,
+      regionsLevels : [],
+      regions : [],
+      scenariosCollection : [],
+      regionId : "1",
+
       graph: 1
-    };
+    }
+
+    this.regionLevel = this.regionLevel.bind(this);
 
     this.chartBtn = this.chartBtn.bind(this);
     this.columnBtn = this.columnBtn.bind(this);
     this.tableBtn = this.tableBtn.bind(this);
   }
 
+  regionLevel() {
+      itemData.getRegionLevels(this.state.lang).then(result => {
+      this.setState( { regionsLevels : result} )
+    });
+  }
+
   componentDidMount() {
+    /*
     itemData.getRegionLevels().then(result => {
       this.setState({ items: result});
       console.log("getRegionLevels result: " + result);
     });
+    */
+    this.regionLevel();
+    //getStrings.chooseLang(this.state.lang);
   }
 
   chartBtn(){
@@ -57,8 +74,6 @@ class App extends Component {
     this.setState({ graph: 3});
     console.log("graph: " + this.state.graph);
   }
-
-  //renderissä haetaan graph arvo App.js ja viedään se Graphs.js, nappien onClickissä voi vaihtaa sitä graph arvoa ja päivittää App.js render()
 
   render() {
     return ( 
@@ -80,7 +95,7 @@ class App extends Component {
         </div>         
       </div>       
       <div className="col-md-6">
-        <Graphs items={ this.state.items } graph={ this.state.graph }/>
+        <Graphs regionsLevels={ this.state.regionsLevels } graph={ this.state.graph }/>
         <button className="col-md-offset-4 btn btn-default" onClick={ this.chartBtn }>Pyöreä pylväskaavio</button>
         <button className="btn btn-default" onClick={ this.columnBtn }>Pylväskaavio</button>
         <button className="btn btn-default" onClick={ this.tableBtn }>Taulukko</button>
