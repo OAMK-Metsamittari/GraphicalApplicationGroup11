@@ -43,6 +43,7 @@ class App extends Component {
   regionLevel() {
       itemData.getRegionLevels(this.state.lang).then(result => {
       this.setState( { regionsLevels : result} )
+      console.log("regionsLevels: " + result);
     });
   }
 
