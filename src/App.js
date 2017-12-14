@@ -25,21 +25,18 @@ class App extends Component {
     super(props);
 
     this.state = {
-<<<<<<< HEAD
       scenario:[],
       selectedScenarioId:[],
       selectedScenarioName:[],
       regionsLevels:[],
       year:[],
       items: [],
-=======
       lang: true,
       regionsLevels : [],
       regions : [],
       scenariosCollection : [],
       regionId : "1",
 
->>>>>>> 523b61c4853fe6218651b07bc4c558c7690891a1
       graph: 1
     }
 
@@ -79,16 +76,12 @@ class App extends Component {
   }
 
   componentDidMount() {
-<<<<<<< HEAD
     
-=======
-    /*
->>>>>>> 523b61c4853fe6218651b07bc4c558c7690891a1
+    
     itemData.getRegionLevels().then(result => {
       this.setState({ items: result});
       console.log("getRegionLevels result: " + result);
     });
-<<<<<<< HEAD
     toDoData.getYear().then(result=>{           
       this.setState({year:result.data})
       let timePeriods = result.data[0].timePeriods;
@@ -100,11 +93,9 @@ class App extends Component {
       this.setState({scenario:result.data})
       this.setState({indicator:result.data})                     
     });
-=======
-    */
+    
     this.regionLevel();
     //getStrings.chooseLang(this.state.lang);
->>>>>>> 523b61c4853fe6218651b07bc4c558c7690891a1
   }
 
   chartBtn(){
@@ -130,14 +121,11 @@ class App extends Component {
     this.setState({selectedScenarioName:sName});       
   }
 
-<<<<<<< HEAD
   selectedYear(year,id){
     this.setState({period:year});
     this.setState({periodId:id});
   }
 
-=======
->>>>>>> 523b61c4853fe6218651b07bc4c558c7690891a1
   render() {
     return ( 
     <div>        
