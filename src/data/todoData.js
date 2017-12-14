@@ -67,4 +67,32 @@ function getScenarioCollection(collectionId, regionId)
  
 }
 
-export default { getRegionLevels, getRegions, getScenarioCollection };
+function getScenario(sId,rId){  
+    const scenarioCollectionId = sId || 6;
+    const regionId = rId || 24;
+    return new Promise((resolve,reject)=>{
+      axios.get("http://melatupa.azurewebsites.net/scenarioCollection/"+scenarioCollectionId +"/region/"+regionId).
+      then(result=>{        
+        resolve(result);
+      })
+      .catch(error=>{
+          console.log(error);
+          reject();
+      })
+    })   
+}
+
+function getYear(){
+    return new Promise((resolve,reject)=>{
+      axios.get("http://melatupa.azurewebsites.net/scenarioCollection/6/region/24").
+      then(result=>{        
+        resolve(result);
+      })
+      .catch(error=>{
+          console.log(error);
+          reject();
+      })
+    })   
+}
+
+export default { getRegionLevels, getRegions, getScenarioCollection, getScenario, getYear };

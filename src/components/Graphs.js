@@ -10,7 +10,7 @@ class Graphs extends Component {
 
         let processedTodoTypes = [];
         
-        this.props.items.forEach(element => {
+        this.props.regionsLevels.forEach(element => {
             let todoIndex = processedTodoTypes.findIndex(todoType => todoType.name === element.type);
             if(todoIndex === -1)
             {

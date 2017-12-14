@@ -16,6 +16,7 @@ import Region from './components/Region';
 import ScenarioCollection from './components/ScenarioCollection';
 import Scenario from './components/Scenario';
 import Timing from './components/Timing';
+import toDoData from './data/todoData';
 
 class App extends Component {
 
@@ -24,19 +25,59 @@ class App extends Component {
     super(props);
 
     this.state = {
+      scenario:[],
+      selectedScenarioId:[],
+      selectedScenarioName:[],
+      regionsLevels:[],
+      year:[],
       items: [],
       graph: 1
-    };
+    }
+
+    this.regionLevel = this.regionLevel.bind(this);
 
     this.chartBtn = this.chartBtn.bind(this);
     this.columnBtn = this.columnBtn.bind(this);
     this.tableBtn = this.tableBtn.bind(this);
+    this.selectedScenarioNumber = this.selectedScenarioNumber.bind(this);
+    this.selectedYear = this.selectedYear.bind(this);
+  }
+
+  regionLevel() {
+      itemData.getRegionLevels(this.state.lang).then(result => {
+      this.setState( { regionsLevels : result} )
+    });
+  }
+
+  regionLevel() {
+      itemData.getRegionLevels(this.state.lang).then(result => {
+      this.setState( { regionsLevels : result} )
+    });
+  }
+
+  regionLevel() {
+      itemData.getRegionLevels(this.state.lang).then(result => {
+      this.setState( { regionsLevels : result} )
+      console.log("regionsLevels: " + result);
+    });
   }
 
   componentDidMount() {
+    
     itemData.getRegionLevels().then(result => {
       this.setState({ items: result});
       console.log("getRegionLevels result: " + result);
+    });
+    toDoData.getYear().then(result=>{           
+      this.setState({year:result.data})
+      let timePeriods = result.data[0].timePeriods;
+      let timeStart = result.data[0].timePeriods[0].yearStart;
+      let timeEnd = result.data[0].timePeriods[0].yearEnd;
+      this.setState({period:timeStart+"-"+timeEnd});       
+    }); 
+    toDoData.getScenario().then(result=>{           
+      this.setState({scenario:result.data})
+      this.setState({indicator:result.data})                     
     });
   }
 
@@ -57,8 +98,16 @@ class App extends Component {
     this.setState({ graph: 3});
     console.log("graph: " + this.state.graph);
   }
+  selectedScenarioNumber(result,sName){  
+    this.setState({scenarioNumber:result.length}); 
+    this.setState({selectedScenarioId:result}); 
+    this.setState({selectedScenarioName:sName});       
+  }
 
-  //renderissä haetaan graph arvo App.js ja viedään se Graphs.js, nappien onClickissä voi vaihtaa sitä graph arvoa ja päivittää App.js render()
+  selectedYear(year,id){
+    this.setState({period:year});
+    this.setState({periodId:id});
+  }
 
   render() {
     return ( 
@@ -75,12 +124,12 @@ class App extends Component {
               <RegionLevel />
               <Region />
               <ScenarioCollection />
-              <Scenario />
-              <Timing />
+              <Scenario scenario = {this.state.scenario} selectedScenarioNumber = {this.selectedScenarioNumber}/>
+              <Timing year={this.state.year} selectedYear={this.selectedYear}/>
         </div>         
       </div>       
       <div className="col-md-6">
-        <Graphs items={ this.state.items } graph={ this.state.graph }/>
+        <Graphs regionsLevels={ this.state.regionsLevels } graph={ this.state.graph }/>
         <button className="col-md-offset-4 btn btn-default" onClick={ this.chartBtn }>Pyöreä pylväskaavio</button>
         <button className="btn btn-default" onClick={ this.columnBtn }>Pylväskaavio</button>
         <button className="btn btn-default" onClick={ this.tableBtn }>Taulukko</button>
