@@ -4,8 +4,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 class ScenarioCollection extends Component {
     render () {
         return (
-            <div class="row">
-                <div class="col-md-12 textfont"><b>Skenaario kokoelma</b>
+            <div className="row">
+                <div className="col-md-12 textfont"><b>Skenaario kokoelma</b>
                 <div>
                     <select>
                     <option value="test1">test</option>

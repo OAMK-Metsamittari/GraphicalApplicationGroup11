@@ -1,20 +1,22 @@
 import React, { Component } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-class Regionlevel extends Component {s    
+class Regionlevel extends Component {
+    constructor(props){
+        super(props);
+    }   
     render () {
-       
+        const {regionLevel} = this.props;
         return (
             <div className="row">
-                <div className="col-md-12 textfont"><b>Aluetasot</b>
-                <div>
-                    <select>
-                    <option value="test1">test</option>
-                    <option value="test2">123</option>
-                    <option value="test3">456</option>
-                    <option value="test4">789</option>
-                </select>
-                </div>
+                <div className="col-md-12 textfont"><b>Aluetasot</b>                
+                    <select className="form-control">
+                        <option>Valitse aluetaso</option>
+                            {
+                                regionLevel.map(element=>
+                                <option value={element.id} key={element.id} >{element.name}</option>) 
+                            }
+                    </select>                
                 </div>
             </div>     
         )      

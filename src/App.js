@@ -26,46 +26,26 @@ class App extends Component {
 
     this.state = {
       scenario:[],
-      selectedScenarioId:[],
-      selectedScenarioName:[],
+      selectedRegion:[],
+      selectedScenarioId:[],     
+      regionLevel:[],
       regionsLevels:[],
+      region:[],
       year:[],
       items: [],
-      lang: true,
-      regionsLevels : [],
-      regions : [],
-      scenariosCollection : [],
-      regionId : "1",
-
+      lang: true, 
       graph: 1
     }
 
     this.regionLevel = this.regionLevel.bind(this);
+    this.scenarioRegId = this.scenarioRegId.bind(this);
+    this.selectedRegLevelId =  this.selectedRegLevelId.bind(this);
+    this.selectedYear = this.selectedYear.bind(this);
 
     this.chartBtn = this.chartBtn.bind(this);
     this.columnBtn = this.columnBtn.bind(this);
     this.tableBtn = this.tableBtn.bind(this);
-    this.selectedScenarioNumber = this.selectedScenarioNumber.bind(this);
-    this.selectedYear = this.selectedYear.bind(this);
-  }
-
-  regionLevel() {
-      itemData.getRegionLevels(this.state.lang).then(result => {
-      this.setState( { regionsLevels : result} )
-    });
-  }
-
-  regionLevel() {
-      itemData.getRegionLevels(this.state.lang).then(result => {
-      this.setState( { regionsLevels : result} )
-    });
-  }
-
-  regionLevel() {
-      itemData.getRegionLevels(this.state.lang).then(result => {
-      this.setState( { regionsLevels : result} )
-      console.log("regionsLevels: " + result);
-    });
+  
   }
 
   regionLevel() {
@@ -78,10 +58,24 @@ class App extends Component {
   componentDidMount() {
     
     
-    itemData.getRegionLevels().then(result => {
+    /*itemData.getRegionLevels().then(result => {
       this.setState({ items: result});
       console.log("getRegionLevels result: " + result);
+    });  */ 
+    toDoData.getRegions().then(result=>{                  
+      this.setState({region:result.data})       
+      this.setState({regionName:result.data[0].name});   
+   });
+
+    toDoData.getRegionLevels().then(result=>{           
+      this.setState({regionLevel:result.data})          
     });
+
+    toDoData.getScenario().then(result=>{           
+      this.setState({scenario:result.data})
+      this.setState({indicator:result.data})                     
+    });
+
     toDoData.getYear().then(result=>{           
       this.setState({year:result.data})
       let timePeriods = result.data[0].timePeriods;
@@ -89,12 +83,9 @@ class App extends Component {
       let timeEnd = result.data[0].timePeriods[0].yearEnd;
       this.setState({period:timeStart+"-"+timeEnd});       
     }); 
-    toDoData.getScenario().then(result=>{           
-      this.setState({scenario:result.data})
-      this.setState({indicator:result.data})                     
-    });
     
-    this.regionLevel();
+    
+    //this.regionLevel();
     //getStrings.chooseLang(this.state.lang);
   }
 
@@ -115,6 +106,30 @@ class App extends Component {
     this.setState({ graph: 3});
     console.log("graph: " + this.state.graph);
   }
+
+  selectedRegLevelId(regionId){ 
+    toDoData.getRegions(regionId).then(result=>{                  
+      this.setState({region:result.data})
+      this.setState({regionName:result.data[0].name});              
+        })
+      this.setState({updateSCollectionById:''});
+    }
+
+
+  selectedRegionId(regionId,rName){ 
+    this.setState({updateSCollectionById:regionId})
+    this.setState({regionName:rName});
+  }
+  
+
+  scenarioRegId(scenId,regId){    
+    toDoData.getScenario(scenId,regId).then(result=>{                  
+      this.setState({scenario:result.data}) 
+      this.setState({year:result.data})
+      this.setState({indicator:result.data})          
+    })
+  }
+
   selectedScenarioNumber(result,sName){  
     this.setState({scenarioNumber:result.length}); 
     this.setState({selectedScenarioId:result}); 
@@ -138,9 +153,9 @@ class App extends Component {
       <div className="col-md-3 well well-sm indicator" >  
         <div className="col-md-12">  
               <ScenarioChoice />               
-              <RegionLevel />
-              <Region />
-              <ScenarioCollection />
+              <RegionLevel regionLevel={this.state.regionLevel} selectedRegLevelId={this.selectedRegLevelId}/>
+              <Region region={this.state.region} selectedRegId={this.selectedRegId}/>
+              <ScenarioCollection ScenarioCollection={this.state.region} updateSCollectionById={this.state.updateSCollectionById} scenarioRegId={this.seranioRegId}/>
               <Scenario scenario = {this.state.scenario} selectedScenarioNumber = {this.selectedScenarioNumber}/>
               <Timing year={this.state.year} selectedYear={this.selectedYear}/>
         </div>         
