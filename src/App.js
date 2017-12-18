@@ -27,7 +27,8 @@ class App extends Component {
     this.state = {
       scenario:[],
       selectedRegion:[],
-      selectedScenarioId:[],     
+      selectedScenarioId:[],    
+      scenarioCollection:[],  
       regionLevel:[],
       regionsLevels:[],
       region:[],
@@ -64,7 +65,7 @@ class App extends Component {
     });  */ 
     toDoData.getRegions().then(result=>{                  
       this.setState({region:result.data})       
-      this.setState({regionName:result.data[0].name});   
+     // this.setState({regionName:result.data[0].name});   
    });
 
     toDoData.getRegionLevels().then(result=>{           
@@ -73,15 +74,19 @@ class App extends Component {
 
     toDoData.getScenario().then(result=>{           
       this.setState({scenario:result.data})
-      this.setState({indicator:result.data})                     
+      //this.setState({indicator:result.data})                     
+    });
+
+    toDoData.getScenarioCollection().then(result=>{
+      this.setState({scenarioCollection:result.data})
     });
 
     toDoData.getYear().then(result=>{           
       this.setState({year:result.data})
-      let timePeriods = result.data[0].timePeriods;
+      /*let timePeriods = result.data[0].timePeriods;
       let timeStart = result.data[0].timePeriods[0].yearStart;
       let timeEnd = result.data[0].timePeriods[0].yearEnd;
-      this.setState({period:timeStart+"-"+timeEnd});       
+      this.setState({period:timeStart + "-" + timeEnd}); */   
     }); 
     
     
@@ -112,13 +117,13 @@ class App extends Component {
       this.setState({region:result.data})
       this.setState({regionName:result.data[0].name});              
         })
-      this.setState({updateSCollectionById:''});
+      this.setState({updateCollection:''});
     }
 
 
-  selectedRegionId(regionId,rName){ 
-    this.setState({updateSCollectionById:regionId})
-    this.setState({regionName:rName});
+  selectedRegionId(regionId,regName){ 
+    this.setState({updateCollection:regionId})
+    this.setState({regionName:regName});
   }
   
 
@@ -126,14 +131,13 @@ class App extends Component {
     toDoData.getScenario(scenId,regId).then(result=>{                  
       this.setState({scenario:result.data}) 
       this.setState({year:result.data})
-      this.setState({indicator:result.data})          
+      //this.setState({indicator:result.data})          
     })
   }
 
-  selectedScenarioNumber(result,sName){  
-    this.setState({scenarioNumber:result.length}); 
+  selectedScenarioNumber(result,scenName){       
     this.setState({selectedScenarioId:result}); 
-    this.setState({selectedScenarioName:sName});       
+    this.setState({selectedScenarioName:scenName});       
   }
 
   selectedYear(year,id){
@@ -155,7 +159,7 @@ class App extends Component {
               <ScenarioChoice />               
               <RegionLevel regionLevel={this.state.regionLevel} selectedRegLevelId={this.selectedRegLevelId}/>
               <Region region={this.state.region} selectedRegId={this.selectedRegId}/>
-              <ScenarioCollection ScenarioCollection={this.state.region} updateSCollectionById={this.state.updateSCollectionById} scenarioRegId={this.seranioRegId}/>
+              <ScenarioCollection scenarioCollection={this.state.region} updateCollection={this.state.updateCollection} scenarioRegId={this.scenarioRegId}/>
               <Scenario scenario = {this.state.scenario} selectedScenarioNumber = {this.selectedScenarioNumber}/>
               <Timing year={this.state.year} selectedYear={this.selectedYear}/>
         </div>         

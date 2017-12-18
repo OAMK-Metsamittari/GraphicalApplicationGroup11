@@ -60,10 +60,10 @@ function getScenarioCollection(collectionId, regionId)
 }
 
 function getScenario(scenId,regId){  
-    const scenCollectionId = scenId || 6;
+    const collectionId = scenId || 6;
     const regionId = regId || 24;
     return new Promise((resolve,reject)=>{
-      axios.get("http://melatupa.azurewebsites.net/scenarioCollection/"+scenCollectionId +"/region/"+regionId).then(result=>{        
+      axios.get("http://melatupa.azurewebsites.net/scenarioCollection/"+ collectionId +"/region/"+regionId).then(result=>{        
         resolve(result);
       })
       .catch(error=>{
