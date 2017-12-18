@@ -32,6 +32,8 @@ class App extends Component {
       regionLevel:[],
       regionsLevels:[],
       region:[],
+      updateCollection:'',
+      selectedYear:[],
       year:[],
       items: [],
       lang: true, 
@@ -41,7 +43,10 @@ class App extends Component {
     this.regionLevel = this.regionLevel.bind(this);
     this.scenarioRegId = this.scenarioRegId.bind(this);
     this.selectedRegLevelId =  this.selectedRegLevelId.bind(this);
+    this.selectedRegionId = this.selectedRegionId.bind(this);
     this.selectedYear = this.selectedYear.bind(this);
+    this.selectedScenario = this.selectedScenario.bind(this);
+    this.selectedYear = this.selectedYear.bind(this);    
 
     this.chartBtn = this.chartBtn.bind(this);
     this.columnBtn = this.columnBtn.bind(this);
@@ -135,7 +140,7 @@ class App extends Component {
     })
   }
 
-  selectedScenarioNumber(result,scenName){       
+  selectedScenario(result,scenName){       
     this.setState({selectedScenarioId:result}); 
     this.setState({selectedScenarioName:scenName});       
   }
@@ -158,9 +163,9 @@ class App extends Component {
         <div className="col-md-12">  
               <ScenarioChoice />               
               <RegionLevel regionLevel={this.state.regionLevel} selectedRegLevelId={this.selectedRegLevelId}/>
-              <Region region={this.state.region} selectedRegId={this.selectedRegId}/>
+              <Region region={this.state.region} selectedRegionId={this.selectedRegionId}/>
               <ScenarioCollection scenarioCollection={this.state.region} updateCollection={this.state.updateCollection} scenarioRegId={this.scenarioRegId}/>
-              <Scenario scenario = {this.state.scenario} selectedScenarioNumber = {this.selectedScenarioNumber}/>
+              <Scenario scenario = {this.state.scenario} selectedScenario = {this.selectedScenario}/>
               <Timing year={this.state.year} selectedYear={this.selectedYear}/>
         </div>         
       </div>       

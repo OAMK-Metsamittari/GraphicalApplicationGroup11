@@ -3,15 +3,17 @@ import React, { Component } from 'react'
 class Scenario extends Component {
     constructor(props){
         super(props);
-        this.state = {                 
-        }      
+        this.scenarioHandler = this.scenarioHandler.bind(this);
+    }
+    scenarioHandler(event){
+        this.props.selectedScenario(event.target.value);
     }
     render () {
         const {scenario} = this.props;
         return (
             <div className="row">
                 <div className="col-md-12 textfont"><b>Skenaariot </b>
-                    <select className="form-control">
+                    <select className="form-control" onChange={this.scenarioHandler}>
                         <option>Valitse skenaario</option>
                             {            
                                 scenario.map(element=>
