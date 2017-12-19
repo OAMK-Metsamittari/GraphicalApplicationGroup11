@@ -26,11 +26,17 @@ class App extends Component {
 
     this.state = {
       scenario:[],
-      selectedScenarioId:[],
-      selectedScenarioName:[],
+      selectedRegion:[],
+      selectedScenarioId:[],    
+      scenarioCollection:[],  
+      regionLevel:[],
       regionsLevels:[],
+      region:[],
+      updateCollection:'',
+      selectedYear:[],
       year:[],
       items: [],
+<<<<<<< HEAD
       lang: true,
       regionsLevels : [],
       regions : [],
@@ -41,20 +47,33 @@ class App extends Component {
       valuesArray : [],
       valuesGraph : [],
 
+=======
+      lang: true, 
+>>>>>>> 07a50af70e43ee73682a260bd0386ee0faf1a48d
       graph: 1
     }
 
     this.regionLevel = this.regionLevel.bind(this);
+    this.scenarioRegId = this.scenarioRegId.bind(this);
+    this.selectedRegLevelId =  this.selectedRegLevelId.bind(this);
+    this.selectedRegionId = this.selectedRegionId.bind(this);
+    this.selectedYear = this.selectedYear.bind(this);
+    this.selectedScenario = this.selectedScenario.bind(this);
+    this.selectedYear = this.selectedYear.bind(this);    
 
     this.chartBtn = this.chartBtn.bind(this);
     this.columnBtn = this.columnBtn.bind(this);
     this.tableBtn = this.tableBtn.bind(this);
+<<<<<<< HEAD
     this.testBtn = this.testBtn.bind(this);
 
     this.selectedScenarioNumber = this.selectedScenarioNumber.bind(this);
     this.selectedYear = this.selectedYear.bind(this);
 
     this.updateGraph = this.updateGraph.bind(this);
+=======
+  
+>>>>>>> 07a50af70e43ee73682a260bd0386ee0faf1a48d
   }
 
   regionLevel() {
@@ -65,24 +84,45 @@ class App extends Component {
   }
 
   componentDidMount() {
+<<<<<<< HEAD
       
     itemData.getRegionLevels().then(result => {
+=======
+    
+    
+    /*itemData.getRegionLevels().then(result => {
+>>>>>>> 07a50af70e43ee73682a260bd0386ee0faf1a48d
       this.setState({ items: result});
       console.log("getRegionLevels result: " + result);
+    });  */ 
+    toDoData.getRegions().then(result=>{                  
+      this.setState({region:result.data})       
+     // this.setState({regionName:result.data[0].name});   
+   });
+
+    toDoData.getRegionLevels().then(result=>{           
+      this.setState({regionLevel:result.data})          
     });
-    toDoData.getYear().then(result=>{           
-      this.setState({year:result.data})
-      let timePeriods = result.data[0].timePeriods;
-      let timeStart = result.data[0].timePeriods[0].yearStart;
-      let timeEnd = result.data[0].timePeriods[0].yearEnd;
-      this.setState({period:timeStart+"-"+timeEnd});       
-    }); 
+
     toDoData.getScenario().then(result=>{           
       this.setState({scenario:result.data})
-      this.setState({indicator:result.data})                     
+      //this.setState({indicator:result.data})                     
     });
+
+    toDoData.getScenarioCollection().then(result=>{
+      this.setState({scenarioCollection:result.data})
+    });
+
+    toDoData.getYear().then(result=>{           
+      this.setState({year:result.data})
+      /*let timePeriods = result.data[0].timePeriods;
+      let timeStart = result.data[0].timePeriods[0].yearStart;
+      let timeEnd = result.data[0].timePeriods[0].yearEnd;
+      this.setState({period:timeStart + "-" + timeEnd}); */   
+    }); 
     
-    this.regionLevel();
+    
+    //this.regionLevel();
     //getStrings.chooseLang(this.state.lang);
   }
 
@@ -139,10 +179,33 @@ class App extends Component {
     this.setState({ graph: 3});
     console.log("graph: " + this.state.graph);
   }
-  selectedScenarioNumber(result,sName){  
-    this.setState({scenarioNumber:result.length}); 
+
+  selectedRegLevelId(regionId){ 
+    toDoData.getRegions(regionId).then(result=>{                  
+      this.setState({region:result.data})
+      this.setState({regionName:result.data[0].name});              
+        })
+      this.setState({updateCollection:''});
+    }
+
+
+  selectedRegionId(regionId,regName){ 
+    this.setState({updateCollection:regionId})
+    this.setState({regionName:regName});
+  }
+  
+
+  scenarioRegId(scenId,regId){    
+    toDoData.getScenario(scenId,regId).then(result=>{                  
+      this.setState({scenario:result.data}) 
+      this.setState({year:result.data})
+      //this.setState({indicator:result.data})          
+    })
+  }
+
+  selectedScenario(result,scenName){       
     this.setState({selectedScenarioId:result}); 
-    this.setState({selectedScenarioName:sName});       
+    this.setState({selectedScenarioName:scenName});       
   }
 
   selectedYear(year,id){
@@ -162,10 +225,10 @@ class App extends Component {
       <div className="col-md-3 well well-sm indicator" >  
         <div className="col-md-12">  
               <ScenarioChoice />               
-              <RegionLevel />
-              <Region />
-              <ScenarioCollection />
-              <Scenario scenario = {this.state.scenario} selectedScenarioNumber = {this.selectedScenarioNumber}/>
+              <RegionLevel regionLevel={this.state.regionLevel} selectedRegLevelId={this.selectedRegLevelId}/>
+              <Region region={this.state.region} selectedRegionId={this.selectedRegionId}/>
+              <ScenarioCollection scenarioCollection={this.state.region} updateCollection={this.state.updateCollection} scenarioRegId={this.scenarioRegId}/>
+              <Scenario scenario = {this.state.scenario} selectedScenario = {this.selectedScenario}/>
               <Timing year={this.state.year} selectedYear={this.selectedYear}/>
         </div>         
       </div>       

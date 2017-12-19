@@ -2,17 +2,26 @@ import React, { Component } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 class Region extends Component {
+    constructor(props){
+        super(props);        
+        this.regionHandler = this.regionHandler.bind(this);
+    }    
+    regionHandler(event){        
+        this.props.selectedRegionId(event.target.value);
+    }  
     render () {
+        const {region} =  this.props;  
         return (
-            <div class="row">
-                <div class="col-md-12 textfont"><b>Alue</b>
+            <div className="row">
+                <div className="col-md-12 textfont"><b>Alue</b>
                 <div>
-                    <select>
-                    <option value="test1">test</option>
-                    <option value="test2">123</option>
-                    <option value="test3">456</option>
-                    <option value="test4">789</option>
-                </select>
+                    <select className="form-control" onChange={this.regionHandler}>
+                    <option>Valitse alue</option>
+                        {
+                            region.map(element=>
+                            <option value={element.id} key={element.id}>{element.name}</option>) 
+                        }                          
+                    </select>
                 </div>
                 </div>
             </div>

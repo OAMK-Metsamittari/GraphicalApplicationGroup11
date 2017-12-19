@@ -2,49 +2,42 @@ import axios from 'axios';
 import moment from 'moment';
 
 var headers =  { headers: {
-    'Accept-Language': 'en' }
+    'Accept-Language': 'fi' }
     }
 
 function getRegionLevels(lang)
 {   
     if (lang === true){
         headers =  { headers: {
-            'Accept-Language': 'fi' }
+            'Accept-Language': 'en' }
             }  
     } else {
         headers =  { headers: {
-            'Accept-Language': 'en' }
+            'Accept-Language': 'fi' }
             }
     }
-    return new Promise((resolve, reject) => {
-        axios.get("http://melatupa.azurewebsites.net/regionLevels", headers)
-        .then(results => {
-            //console.log("getRegionLevels results: " + results)
-            const items = results.data;
-            resolve(items);
+    return new Promise((resolve,reject)=>{
+        axios.get("http://melatupa.azurewebsites.net/regionLevels",headers).then(result=>{        
+          resolve(result);
         })
-        .catch(error => {
-            console.log(error);
+        .catch(error=>{
+            console.log("error");
             reject();
         })
     });
 }
 
 
-function getRegions(id)
+function getRegions(regId)
 {
-
-  return new Promise((resolve, reject) => {
-    axios.get("http://melatupa.azurewebsites.net/regionLevels/" + id + "/regions", headers)
-    .then(results => {
-            //console.log("getRegions results: " + results)
-            const items = results.data;
-            //console.log("getRegions items: " + items)
-        resolve(items);
-    })
-    .catch(error => {
-        console.log(error);
-        reject();
+    const regionId = regId || 1;
+    return new Promise((resolve,reject)=>{
+      axios.get("http://melatupa.azurewebsites.net/regionLevels/"+regionId+"/regions").then(result=>{        
+        resolve(result);        
+      })
+      .catch(error=>{
+          console.log("error");
+          reject();
     })
  });
 }
@@ -53,8 +46,7 @@ function getScenarioCollection(collectionId, regionId)
 {
 
  return new Promise((resolve , reject) => {
-    axios.get( "http://melatupa.azurewebsites.net/scenarioCollection/" + collectionId + "/region/" + regionId, headers)
-    .then(results => {
+    axios.get( "http://melatupa.azurewebsites.net/scenarioCollection/" + collectionId + "/region/" + regionId, headers).then(results => {
         const items = results.data;
         //console.log("getScenarioCollection items: " + items);
         resolve(items);
@@ -67,12 +59,11 @@ function getScenarioCollection(collectionId, regionId)
  
 }
 
-function getScenario(sId,rId){  
-    const scenarioCollectionId = sId || 6;
-    const regionId = rId || 24;
+function getScenario(scenId,regId){  
+    const collectionId = scenId || 6;
+    const regionId = regId || 24;
     return new Promise((resolve,reject)=>{
-      axios.get("http://melatupa.azurewebsites.net/scenarioCollection/"+scenarioCollectionId +"/region/"+regionId).
-      then(result=>{        
+      axios.get("http://melatupa.azurewebsites.net/scenarioCollection/"+ collectionId +"/region/"+regionId).then(result=>{        
         resolve(result);
       })
       .catch(error=>{
@@ -84,8 +75,7 @@ function getScenario(sId,rId){
 
 function getYear(){
     return new Promise((resolve,reject)=>{
-      axios.get("http://melatupa.azurewebsites.net/scenarioCollection/6/region/24").
-      then(result=>{        
+      axios.get("http://melatupa.azurewebsites.net/scenarioCollection/6/region/24").then(result=>{        
         resolve(result);
       })
       .catch(error=>{
