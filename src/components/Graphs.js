@@ -8,23 +8,14 @@ class Graphs extends Component {
 
         console.log("Graphs updated");
 
-        let processedTodoTypes = [];
-        
-        this.props.regionsLevels.forEach(element => {
-            let todoIndex = processedTodoTypes.findIndex(todoType => todoType.name === element.type);
-            if(todoIndex === -1)
-            {
-                processedTodoTypes.push({
-                    name: element.type,
-                    y: 1
-                });
-            }
-            else
-            {
-                processedTodoTypes[todoIndex].y++;
-            }
+        var printedData = []
+
+        this.props.valuesA.forEach(function(element) {
+            printedData.push(element)
         });
-        console.log("processedTodoTypes: " + processedTodoTypes);
+
+        console.log("printedData: " + printedData);
+        console.log("valuesA: " + [this.props.valuesA]);
 
         if (this.props.graph === 1) //chart
         {
@@ -71,7 +62,7 @@ class Graphs extends Component {
                 series: [{
                     type: 'column',
                     name: 'Column',
-                    data: processedTodoTypes // data: processedTodoTypes // [8, 7, 6, 5, 4, 3, 2, 1]
+                    data: printedData // data: processedTodoTypes // [8, 7, 6, 5, 4, 3, 2, 1]
                 }]
             };
 
