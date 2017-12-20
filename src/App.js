@@ -36,7 +36,16 @@ class App extends Component {
       selectedYear:[],
       year:[],
       items: [],
-      lang: true, 
+      lang: true,
+      regionsLevels : [],
+      regions : [],
+      scenariosCollection : [],
+      regionId : "1",
+
+      scenariosA : [],
+      valuesArray : [],
+      valuesGraph : [],
+
       graph: 1
     }
 
@@ -51,7 +60,12 @@ class App extends Component {
     this.chartBtn = this.chartBtn.bind(this);
     this.columnBtn = this.columnBtn.bind(this);
     this.tableBtn = this.tableBtn.bind(this);
-  
+    this.testBtn = this.testBtn.bind(this);
+
+    this.selectedScenarioNumber = this.selectedScenarioNumber.bind(this);
+    this.selectedYear = this.selectedYear.bind(this);
+
+    this.updateGraph = this.updateGraph.bind(this);
   }
 
   regionLevel() {
@@ -60,9 +74,7 @@ class App extends Component {
       console.log("regionsLevels: " + result);
     });
   }
-
   componentDidMount() {  //haetaan toDoDatasta functiot
- 
     toDoData.getRegions().then(result=>{                  
       this.setState({region:result.data})               
    });
@@ -89,6 +101,42 @@ class App extends Component {
     this.setState({ graph: 1});
     console.log("graph: " + this.state.graph);
   }
+
+  testBtn(){
+    itemData.getScenarioCollection(6, 24).then(result => { //scenarioCollectionId, regionId
+      this.setState( { scenariosA : result }, () => {
+        this.updateGraph(this.state.scenariosA)       
+      })
+    })
+  }
+
+  updateGraph(arrayValues) {
+    this.setState( { valuesArray : arrayValues[0].values }, () => {this.refreshValues()});
+  }
+
+  refreshValues(){
+    var arrayResult = []
+
+    this.state.valuesArray.forEach(function(element) {
+      //tässä vois olla if(kaikki dropboxit valittu) niin tee tämä:
+      arrayResult.push(element)
+    })
+
+    this.setState( { valuesGraph : arrayResult }, () => {this.createGraph(1)});
+  }
+
+  createGraph(){
+    console.log(this.state.valuesArray);
+
+    var valuesA = []
+    
+    this.state.valuesGraph.forEach(function(element) {
+      valuesA.push(element.value)
+    });
+
+    console.log("valuesA: " + valuesA);
+  }
+    
 
   columnBtn(){
     console.log("wooo");
@@ -152,10 +200,11 @@ class App extends Component {
         </div>         
       </div>       
       <div className="col-md-6">
-        <Graphs regionsLevels={ this.state.regionsLevels } graph={ this.state.graph }/>
+        <Graphs regionsLevels={ this.state.regionsLevels } valuesA={ [this.state.valuesA] } graph={ this.state.graph }/>
         <button className="col-md-offset-4 btn btn-default" onClick={ this.chartBtn }>Pyöreä pylväskaavio</button>
         <button className="btn btn-default" onClick={ this.columnBtn }>Pylväskaavio</button>
         <button className="btn btn-default" onClick={ this.tableBtn }>Taulukko</button>
+        <button className="btn btn-default" onClick={ this.testBtn }>Test</button>
       </div>
       <div className="col-md-3 well well-sm indicator">
         <div className="col-md-12"> 
