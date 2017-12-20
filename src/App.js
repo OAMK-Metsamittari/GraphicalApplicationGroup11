@@ -31,7 +31,7 @@ class App extends Component {
       scenarioCollection:[],  
       regionLevel:[],
       regionsLevels:[],
-      region:[],
+      region:[],    
       updateCollection:'',
       selectedYear:[],
       year:[],
@@ -61,16 +61,10 @@ class App extends Component {
     });
   }
 
-  componentDidMount() {
-    
-    
-    /*itemData.getRegionLevels().then(result => {
-      this.setState({ items: result});
-      console.log("getRegionLevels result: " + result);
-    });  */ 
+  componentDidMount() {  //haetaan toDoDatasta functiot
+ 
     toDoData.getRegions().then(result=>{                  
-      this.setState({region:result.data})       
-     // this.setState({regionName:result.data[0].name});   
+      this.setState({region:result.data})               
    });
 
     toDoData.getRegionLevels().then(result=>{           
@@ -78,8 +72,7 @@ class App extends Component {
     });
 
     toDoData.getScenario().then(result=>{           
-      this.setState({scenario:result.data})
-      //this.setState({indicator:result.data})                     
+      this.setState({scenario:result.data})                        
     });
 
     toDoData.getScenarioCollection().then(result=>{
@@ -88,18 +81,10 @@ class App extends Component {
 
     toDoData.getYear().then(result=>{           
       this.setState({year:result.data})
-      /*let timePeriods = result.data[0].timePeriods;
-      let timeStart = result.data[0].timePeriods[0].yearStart;
-      let timeEnd = result.data[0].timePeriods[0].yearEnd;
-      this.setState({period:timeStart + "-" + timeEnd}); */   
-    }); 
-    
-    
-    //this.regionLevel();
-    //getStrings.chooseLang(this.state.lang);
+    });
   }
 
-  chartBtn(){
+  chartBtn(){                   //Buttons
     console.log("wooo");
     this.setState({ graph: 1});
     console.log("graph: " + this.state.graph);
@@ -117,37 +102,34 @@ class App extends Component {
     console.log("graph: " + this.state.graph);
   }
 
+    //skenaarioiden hallinnasta valitut kohdat ja niiden ID:t
+
   selectedRegLevelId(regionId){ 
     toDoData.getRegions(regionId).then(result=>{                  
       this.setState({region:result.data})
-      this.setState({regionName:result.data[0].name});              
-        })
+    })
       this.setState({updateCollection:''});
     }
 
 
-  selectedRegionId(regionId,regName){ 
-    this.setState({updateCollection:regionId})
-    this.setState({regionName:regName});
+  selectedRegionId(regionId){ 
+    this.setState({updateCollection:regionId})   
   }
   
 
   scenarioRegId(scenId,regId){    
     toDoData.getScenario(scenId,regId).then(result=>{                  
       this.setState({scenario:result.data}) 
-      this.setState({year:result.data})
-      //this.setState({indicator:result.data})          
+      this.setState({year:result.data})             
     })
   }
 
-  selectedScenario(result,scenName){       
-    this.setState({selectedScenarioId:result}); 
-    this.setState({selectedScenarioName:scenName});       
+  selectedScenario(result){       
+    this.setState({selectedScenarioId:result});      
   }
 
   selectedYear(year,id){
     this.setState({period:year});
-    this.setState({periodId:id});
   }
 
   render() {

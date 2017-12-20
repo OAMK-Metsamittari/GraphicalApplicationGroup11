@@ -44,7 +44,6 @@ function getRegions(regId)
 
 function getScenarioCollection(collectionId, regionId)
 {
-
  return new Promise((resolve , reject) => {
     axios.get( "http://melatupa.azurewebsites.net/scenarioCollection/" + collectionId + "/region/" + regionId, headers).then(results => {
         const items = results.data;
@@ -59,7 +58,7 @@ function getScenarioCollection(collectionId, regionId)
  
 }
 
-function getScenario(scenId,regId){  
+function getScenario(scenId,regId){   
     const collectionId = scenId || 6;
     const regionId = regId || 24;
     return new Promise((resolve,reject)=>{
