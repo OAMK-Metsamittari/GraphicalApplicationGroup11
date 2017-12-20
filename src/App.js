@@ -62,7 +62,7 @@ class App extends Component {
     this.tableBtn = this.tableBtn.bind(this);
     this.testBtn = this.testBtn.bind(this);
 
-    this.selectedScenarioNumber = this.selectedScenarioNumber.bind(this);
+    //this.selectedScenarioNumber = this.selectedScenarioNumber.bind(this);
     this.selectedYear = this.selectedYear.bind(this);
 
     this.updateGraph = this.updateGraph.bind(this);
